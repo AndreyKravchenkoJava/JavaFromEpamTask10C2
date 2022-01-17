@@ -1,0 +1,53 @@
+package project;
+
+import java.util.Scanner;
+
+public class Park {
+    private String name;
+    private Attraction [] proddArray;
+
+    private class Attraction {
+        private int time;
+        private int price;
+
+        public Attraction(int time, int price) {
+            this.time = time;
+            this.price = price;
+        }
+
+        public int getTime() {
+            return time;
+        }
+        public int getPrice() {
+            return price;
+        }
+    }
+
+    public Park(String name) {
+        this.name = name;
+    }
+
+    public void setAttraction() {
+        System.out.println("Enter the numbers attraction add: ");
+        Scanner scanner = new Scanner(System.in);
+        int numbers = scanner.nextInt();
+        proddArray = new Attraction[numbers];
+        for (int i = 0; i < numbers; i++) {
+            System.out.println("Attraction: " + (i + 1));
+            System.out.println("Time : " );
+            int time = scanner.nextInt();
+            System.out.println("Price: ");
+            int price = scanner.nextInt();
+            proddArray[i] = new Attraction(time, price);
+        }
+    }
+
+    public void print() {
+        System.out.println("Name Park: " + this.name);
+        for (int i = 0; i < this.proddArray.length; i++) {
+            System.out.println("Numbers attraction: " + (i + 1));
+            System.out.println("Time work: " + proddArray[i].time);
+            System.out.println("Price attraction: " + proddArray[i].price);
+        }
+    }
+}
