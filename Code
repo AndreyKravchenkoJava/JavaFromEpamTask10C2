@@ -1,0 +1,94 @@
+package project;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Payment {
+    private String name;
+    private Product [] prodArray;
+    private int cost;
+
+    private class Product {
+        private String productName;
+        private int productCost;
+
+
+        public Product(String productName, int productCost) {
+            this.productName = productName;
+            this.productCost = productCost;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+        public int getProductCost() {
+            return productCost;
+        }
+    }
+
+    public Payment(String name) {
+        this.name = name;
+    }
+
+    public void setPayment() throws IOException {
+        this.cost = 0;
+        System.out.println("Enter the numbers of product you want to purchase: ");
+        Scanner scanner = new Scanner(System.in);
+        try {
+            int dim = scanner.nextInt();
+            prodArray = new Product[dim];
+            for (int i = 0; i < dim; i++) {
+                System.out.println("Product " + (i + 1) + ": ");
+                System.out.print("Name: ");
+                String strName = scanner.next();
+                System.out.println("Cost: ");
+                int prodCost = scanner.nextInt();
+                prodArray[i] = new Product(strName, prodCost);
+                this.cost = this.cost + prodArray[i].productCost;
+            }
+        }
+
+        catch (NumberFormatException e) {
+            System.out.println("False format!");
+        }
+        catch (NegativeArraySizeException e) {
+            System.out.println("Size mass cannot be < 0");
+        }
+        catch (NullPointerException e) {
+            System.out.println();
+            System.out.println("Mass doesnt create");
+        }
+    }
+
+    public void printCheque() throws IOException {
+        try {
+            if (this.prodArray.length != 0) {
+                System.out.println("============================");
+                System.out.println(" " + this.name);
+                System.out.println("============================");
+
+                for (int i = 0; i < this.prodArray.length; i++) {
+                    System.out.printf("%3d", i + 1);
+                    System.out.printf("%15s", this.prodArray[i].productName);
+                    System.out.printf("%10d", this.prodArray[i].productCost);
+                    System.out.println();
+                }
+
+                System.out.println("============================");
+                System.out.println("All price: ");
+                System.out.printf("%11d", this.cost);
+                System.out.println();
+                System.out.println("============================");
+            }
+            else {
+                System.out.println();
+                System.out.println("Mass doesnt create");
+            }
+        }
+
+        catch (NullPointerException e) {
+            System.out.println();
+            System.out.println("Mass doesnt create");
+        }
+    }
+}
